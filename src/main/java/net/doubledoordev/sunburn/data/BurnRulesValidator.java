@@ -141,7 +141,7 @@ public class BurnRulesValidator {
         AtomicBoolean isComplete = new AtomicBoolean(true);
 
         if (json.has("dimension") && !json.get("dimension").isJsonNull()) {
-            if (!ResourceLocation.isValidResourceLocation(json.get("dimension").getAsString())) {
+            if (ResourceLocation.tryParse(json.get("dimension").getAsString()) == null) {
                 LOGGER.error("{} Has an invalid dimension set! Please correct \"{}\" to a valid dimension.", location, json.get("dimension").getAsString());
                 isComplete.set(false);
             }
